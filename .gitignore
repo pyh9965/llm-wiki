@@ -1,13 +1,19 @@
+# 원본 데이터 (대용량 파일)
 raw/*.pdf
 raw/*.csv
 raw/*.xlsx
-node_modules/
-.env
+raw/*.zip
+
+# OS
 .DS_Store
+Thumbs.db
+
+# 편집기
+.vscode/
+.idea/
 *.swp
 *.swo
-*~
-.idea/
-.vscode/
-__pycache__/
-*.py[cod]
+
+# 임시 파일
+*.tmp
+*.bak
