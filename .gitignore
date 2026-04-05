@@ -1,9 +1,13 @@
+raw/*.pdf
+raw/*.csv
+raw/*.xlsx
+node_modules/
+.env
 .DS_Store
 *.swp
 *.swo
 *~
 .idea/
 .vscode/
-node_modules/
 __pycache__/
 *.py[cod]

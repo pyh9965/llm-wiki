@@ -1,48 +1,76 @@
-# LLM Wiki
+# LLM Wiki - Karpathy 패턴 기반 분양업무 지식 베이스
 
-LLM(대형 언어 모델, Large Language Model)에 관한 지식을 체계적으로 정리한 위키입니다.
+Karpathy 패턴이란 AI가 작업할 때마다 유용한 지식을 축적해 나가는 방식입니다.
+이 레포는 분양 업무에서 Claude가 생성한 지식을 체계적으로 쌓아두는 위키입니다.
 
-## LLM이란?
+## 이게 뭔가요?
 
-LLM은 방대한 양의 텍스트 데이터로 학습된 인공지능 언어 모델입니다.  
-GPT, Claude, Gemini 같은 AI 어시스턴트의 핵심 기술입니다.
+Claude Code로 분양 업무를 처리할 때, 유용한 정보(법령 해석, 단지 분석, 청약 가이드 등)를
+자동으로 이 레포에 마크다운 파일로 저장합니다.
+다음번에 비슷한 질문이 오면 위키를 먼저 참조하므로 더 빠르고 정확하게 답변합니다.
 
-## 📁 구조
+## 폴더 구조
 
 ```
-wiki/
-├── models/       # 모델별 상세 정리 (GPT, Claude, Gemini, LLaMA 등)
-├── concepts/     # 핵심 개념 (Transformer, Attention, RLHF 등)
-├── papers/       # 주요 논문 요약
-├── tools/        # 관련 도구 및 프레임워크
-└── benchmarks/   # 성능 평가 벤치마크
+llm-wiki/
+├── wiki/
+│   ├── 분양/       # 청약·특별공급·분양가 등 분양 절차 지식
+│   ├── 법령/       # 주택공급규칙, 지방세법 등 관련 법령 정리
+│   ├── 단지분석/   # 단지별 분석 자료 및 템플릿
+│   ├── 고객상담/   # 고객 응대 가이드 및 자주 묻는 질문
+│   ├── 마케팅/     # 분양 마케팅 전략 자료
+│   └── 더희/       # 더희 프로젝트 관련 자료
+├── schema/         # 데이터 스키마 정의 파일
+├── raw/            # 원본 데이터 (PDF, CSV 등 - git 추적 안 함)
+├── CLAUDE.md       # Claude Code 작업 규칙
+└── README.md       # 이 파일
 ```
 
-## 🚀 빠른 시작
+## 설치 방법
 
-1. 처음이라면 → [`wiki/concepts/transformer.md`](wiki/concepts/transformer.md) 부터 읽기
-2. 모델 비교가 궁금하다면 → [`wiki/models/`](wiki/models/)
-3. 논문을 찾는다면 → [`wiki/papers/`](wiki/papers/)
+```bash
+git clone https://github.com/pyh9965/llm-wiki.git
+cd llm-wiki
+```
 
-## 📚 주요 카테고리
+별도 설치가 필요 없습니다. 마크다운 파일을 읽을 수 있는 에디터면 됩니다.
 
-| 카테고리 | 내용 |
-|----------|------|
-| [모델](wiki/models/) | GPT, Claude, Gemini, LLaMA 등 주요 모델 정리 |
-| [개념](wiki/concepts/) | Transformer, Attention, RLHF 등 핵심 개념 |
-| [논문](wiki/papers/) | Attention is All You Need 등 중요 논문 요약 |
-| [도구](wiki/tools/) | LangChain, Ollama 등 개발 도구 |
-| [벤치마크](wiki/benchmarks/) | MMLU, HumanEval 등 성능 평가 지표 |
+## 사용 방법
 
-## 🤝 기여 방법
+### 위키 읽기
 
-1. 이 레포를 Fork
-2. 새 브랜치 생성: `git checkout -b docs/새문서이름`
-3. 문서 작성 후 커밋: `git commit -m "docs: 새 문서 추가"`
-4. Pull Request 생성
+`wiki/` 폴더에서 원하는 주제의 마크다운 파일을 열어보세요.
 
-## 📝 작성 규칙
+```bash
+# 예: 신혼부부 특별공급 가이드 읽기
+cat wiki/분양/특별공급-가이드.md
+```
 
-- 한글로 작성 (전문 용어는 영어 병기)
-- 마크다운(.md) 형식 사용
-- 출처 및 참고 링크 반드시 포함
+### Claude와 함께 사용하기
+
+이 레포가 열린 상태에서 Claude Code를 사용하면, Claude가 자동으로:
+
+1. 관련 위키 페이지가 있는지 먼저 확인
+2. 없으면 MCP 도구로 최신 정보 조회
+3. 조회한 정보를 위키에 저장 (다음번 재사용 가능)
+
+### 새 단지 분석하기
+
+```bash
+# 템플릿 복사
+cp wiki/단지분석/단지분석-템플릿.md wiki/단지분석/단지분석-{단지명}.md
+```
+
+## 주요 문서
+
+| 문서 | 설명 |
+|------|------|
+| [신혼부부 특별공급 가이드](wiki/분양/특별공급-가이드.md) | 제41조 기준 신청 자격·배점 정리 |
+| [지방세법 고급주택 기준](wiki/법령/지방세법-고급주택.md) | 취득세 중과 판정 기준 |
+| [단지분석 템플릿](wiki/단지분석/단지분석-템플릿.md) | 새 단지 분석용 빈 양식 |
+
+## 기여 방법
+
+1. 새로운 지식이 생기면 해당 폴더에 마크다운 파일 추가
+2. 기존 파일 수정 시 상단 `updated:` 날짜 갱신
+3. `_index.md` 파일에 새 문서 링크 추가 후 커밋
